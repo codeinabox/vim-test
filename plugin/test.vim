@@ -24,8 +24,13 @@ let g:test#default_runners = {
   \ 'Perl':       ['Prove'],
   \ 'Racket':     ['RackUnit'],
   \ 'Java':       ['MavenTest', 'GradleTest'],
+<<<<<<< HEAD
   \ 'Scala':      ['SbtTest', 'BloopTest'],
   \ 'Haskell':    ['StackTest'],
+=======
+  \ 'Kotlin':     ['GradleTest'],
+  \ 'Scala':      ['SbtTest'],
+>>>>>>> 4dd1b62... WIP gradle
   \ 'Crystal':    ['CrystalSpec'],
   \ 'Dart':       ['FlutterTest'],
 \}
