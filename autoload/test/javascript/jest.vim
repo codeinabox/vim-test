@@ -46,6 +46,14 @@ endfunction
 
 function! s:nearest_test(position) abort
   let name = test#base#nearest_test(a:position, g:test#javascript#patterns)
+  let testName = join(name['test'])
+
+  if testName =~ '%i'
+  " if testName =~ '\v%(p|s|d|i|f|j|o|#|\%)'
+    let blah = split(testName, '%')
+    return test#base#escape_regex(blah[0])
+  endif
+
   return (len(name['namespace']) ? '^' : '') .
        \ test#base#escape_regex(join(name['namespace'] + name['test'])) .
        \ (len(name['test']) ? '$' : '')
