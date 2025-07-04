@@ -1,10 +1,10 @@
 let test#javascript#patterns = {
   \ 'whole_match': 1,
   \ 'test': [
-    \ '\v^\s*%(it|test)[^''"`]*([''"`])\zs%(.{-}%(\\\1)?){-}\ze\1',
-    \ '\v^\s*%(it.each|test.each|describe.each)[^''"`]*([''"`])\zs%(.{-}%(\\\1)?){-}\ze\1',
+    \ '\v^\s*%(it|test)[^''"`]*([''"`])\zs(.{-}%(\\\1)?){-}\ze\1',
+    \ '\v^\s*%(it.each|test.each|describe.each)\s*\([^)]*\)\s*\(([''"`])\zs([^''"`]*)\ze\1',
   \],
-  \ 'namespace': ['\v^\s*%(describe|suite|context|module)\s*[^''"`]*([''"`])\zs%(.{-}%(\\\1)?){-}\ze\1']
+  \ 'namespace': ['\v^\s*%(describe|suite|context|module)\s*[^''"`]*([''"`])\zs(.{-}%(\\\1)?){-}\ze\1']
 \}
 
 function! test#javascript#has_package(package) abort

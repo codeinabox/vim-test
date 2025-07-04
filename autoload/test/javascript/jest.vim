@@ -49,10 +49,16 @@ function! s:nearest_test(position) abort
   let name = test#base#nearest_test(a:position, g:test#javascript#patterns)
   let testName = join(name['test'])
 
-  if testName =~ '%i'
-  " if testName =~ '\v%(p|s|d|i|f|j|o|#|\%)'
-    let blah = split(testName, '%')
-    return test#base#escape_regex(blah[0])
+  " Check if we're on a test.each line with printf syntax
+  let line = getbufline(a:position['file'], a:position['line'])[0]
+  if line =~ 'test\.each.*%' || line =~ 'it\.each.*%' || line =~ 'describe\.each.*%'
+    " Extract the test name directly from the line
+    let match = matchlist(line, '\v.*(test|it|describe)\.each\([^)]*\)\s*\([''"`]([^''"`]*)[''"`]')
+    if !empty(match)
+      let testName = match[2]
+      let blah = split(testName, '%')
+      return blah[0]
+    endif
   endif
 
   return (len(name['namespace']) ? '^' : '') .
